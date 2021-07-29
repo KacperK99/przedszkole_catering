@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "=d(ifums@1j*$m43y3qt1r*fm-ex0_5wc*b(no7yr6+%_a9fn1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["przedszkole-catering-160761.herokuapp.com", "127.0.0.1"]
 

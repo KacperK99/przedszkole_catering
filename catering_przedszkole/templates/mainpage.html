@@ -8,24 +8,23 @@
     <div class='left_set_mainpage'>
         <h1>{{set.nazwa_zestawu}}</h1>
         <h2>Zestaw składa się z dań: </h2>
-            {% for data in data_set %}
-                {% if data.zestaw.ID == set.ID %}
-                <h1 class="dish_in_set">  {{data.danie.typ_dania.nazwa_typu_dania}} - {{data.danie.nazwa_dania}} </h1>
-                {% endif %}
-            {% empty %}
-            <p>Brak dań</p>
-            {% endfor %}
+        {% for data in data_set %}
+        {% if data.zestaw.ID == set.ID %}
+        <h1 class="dish_in_set"> {{data.danie.typ_dania.nazwa_typu_dania}} - {{data.danie.nazwa_dania}} </h1>
+        {% endif %}
+        {% empty %}
+        <p>Brak dań</p>
+        {% endfor %}
     </div>
     <div class='right_set_mainpage'>
         <h2>Cena: {{set.cena_zestawu}} zł</h2>
-        {% if today <= set.data_zestawu %}
-            <h2>Zestaw będzie ważny w dniu {{set.data_zestawu}}</h2>
+        {% if today <= set.data_zestawu %} <h2>Zestaw będzie ważny w dniu {{set.data_zestawu}}</h2>
             <a class="set_btn" href="zestaw/{{set.ID}}">Szczegóły</a>
             <a class="set_btn" href="zestaw/zamow/{{set.ID}}">Zamów</a>
-        {% else %}
+            {% else %}
             <h2>Zestaw był ważny w dniu {{set.data_zestawu}}</h2>
             <a class="set_btn" href="zestaw/{{set.ID}}">Szczegóły</a>
-        {% endif %}
+            {% endif %}
     </div>
 </div>
 {% empty %}
