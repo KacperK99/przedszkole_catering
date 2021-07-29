@@ -1,0 +1,1 @@
+web: gunicorn przedszkole_catering.wsgi
