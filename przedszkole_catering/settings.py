@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "przedszkole_catering.urls"
@@ -131,4 +132,8 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "przedszkole_catering/media")
 
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ["static"]))
+STATIC_ROOT = posixpath.join(BASE_DIR, "staticfiles")
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
