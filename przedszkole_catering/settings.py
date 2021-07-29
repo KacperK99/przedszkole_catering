@@ -131,4 +131,4 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "przedszkole_catering/media")
 
-STATIC_ROOT = os.path.join(BASE_DIR, "przedszkole_catering")
+STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ["static"]))
