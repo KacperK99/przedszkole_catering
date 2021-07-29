@@ -132,7 +132,9 @@ body {
     float: none !important;
   }
   .topnav a {
-    font-size: 24px !important;
+    font-size: 26px !important;
+    padding-top: 21px !important;
+    padding-bottom: 21px !important;
   }
   .set_mainpage {
     width: 90% !important;
