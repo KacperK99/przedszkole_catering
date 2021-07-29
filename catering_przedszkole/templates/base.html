@@ -30,8 +30,10 @@
         <a href="{% url 'mainpage' %}" style="float: left">Catering dla przedszkoli</a>
     </div>
     {% endif %}
+    {% if request.user.is_authenticated %}
     <p class="naglowek">Zalogowano jako {{user.username}}</p>
     <br>
+    {% endif %}
     {% block content %}{% endblock %}
 </body>
 
