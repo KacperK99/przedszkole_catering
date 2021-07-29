@@ -26,7 +26,7 @@ SECRET_KEY = "=d(ifums@1j*$m43y3qt1r*fm-ex0_5wc*b(no7yr6+%_a9fn1"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["przedszkole-catering-160761.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["http://przedszkole-catering-160761.herokuapp.com", "127.0.0.1"]
 
 AUTH_USER_MODEL = "catering_przedszkole.Uzytkownik"
 # Application definition

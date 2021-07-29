@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="pl-PL">
 {% load static %}
+
 <head>
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
 
-{% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <div class="topnav" id="myTopnav">
         <a href="{% url 'mainpage' %}" class="first_in_topnav" style="float:left;">Catering dla przedszkoli</a>
         <a href="javascript:void(0);" class="icon" onclick="Hamburger()">
-          <i class="fa fa-bars"></i>
+            <i class="fa fa-bars"></i>
         </a>
         <a href="{% url 'logout' %}">Wyloguj</a>
         <a href="{% url 'konto' %}">Moje konto</a>
@@ -21,72 +23,73 @@
         {% endif %}
         <a href="{% url 'zamowienia' %}">Moje zamówienia</a>
     </div>
-{% else %}
+    {% else %}
     <div class="topnav">
         <a href="{% url 'login' %}">Zaloguj się</a>
         <a href="{% url 'signup' %}">Zarejestruj się</a>
         <a href="{% url 'mainpage' %}" style="float: left">Catering dla przedszkoli</a>
     </div>
-{% endif %}	
-<p class="naglowek">Zalogowano jako {{user.username}}</p>
-<br>
-{% block content %}{% endblock %}
+    {% endif %}
+    <p class="naglowek">Zalogowano jako {{user.username}}</p>
+    <br>
+    {% block content %}{% endblock %}
 </body>
+
 </html>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-              // Get the modal
-      var modal = document.getElementById("myModal");
+    $(document).ready(function () {
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
-      // Get the button that opens the modal
-      var btn = document.getElementById("myBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
 
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-      modal.style.display = "block";
-      }
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
 
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-      modal.style.display = "none";
-      }
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
 
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-      }
-      $("#send").click(function() {
-          const commentInput = document.getElementById("inputComment").value
-          const numberInput = document.getElementById("inputNumber").value
-          console.log(commentInput, numberInput);
-          $.ajax({
-              url: '/catering_przedszkole/mainpage/zestaw/zamow/{{zestaw_id}}',
-              type: "GET",
-              data: {
-                  commentInput:commentInput,
-                  numberInput: numberInput,
-                  csrfmiddlewaretoken: '{{ csrf_token }}'
-                  },
-              error : function(xhr,errmsg,err) {
-                  alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
-              }
-          });
-      });
-  });
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        $("#send").click(function () {
+            const commentInput = document.getElementById("inputComment").value
+            const numberInput = document.getElementById("inputNumber").value
+            console.log(commentInput, numberInput);
+            $.ajax({
+                url: '/catering_przedszkole/mainpage/zestaw/zamow/{{zestaw_id}}',
+                type: "GET",
+                data: {
+                    commentInput: commentInput,
+                    numberInput: numberInput,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                error: function (xhr, errmsg, err) {
+                    alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    });
 
 
-  function Hamburger() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
+    function Hamburger() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
     }
-  }
 </script>
