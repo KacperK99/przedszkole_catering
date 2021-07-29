@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="searching_container">
+    <form method="GET" action="admin_skladniki_dania">
+        <h1 style="color: white;">Wyszukaj powiązanie danie-składnik</h1>
+        <input placeholder="Wyszukaj danie" name="danie">
+        <input placeholder="Wyszukaj składnik" name="skladnik">
+        <button class="set_btn" type="submit">Szukaj</button>
+    </form>
+</div>
+
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_skladniki_dania_add' %}">Dodaj relację składnik-danie</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Nazwa dania</th>
+            <th>Nazwa składnika</th>
+            <th>Usuń relację składnik-danie</th>
+            <th>Edytuj relację składnik-danie</th>
+        </tr>
+    {% for s_d in skladniki_dania %}
+        <tr>
+            <td>{{ s_d.danie.nazwa_dania }}</td>
+            <td>{{ s_d.skladnik.nazwa_skladnika }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_skladniki_dania/admin_skladniki_dania_delete/{{s_d.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_skladniki_dania/admin_skladniki_dania_update/{{s_d.ID}}">Edytuj</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

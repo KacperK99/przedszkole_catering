@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_typ_dania_add' %}">Dodaj typ dania</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Nazwa</th>
+            <th>Usuń typ dania</th>
+            <th>Edytuj typ dania</th>
+        </tr>
+    {% for type in types %}
+        <tr>
+            <td>{{ type.nazwa_typu_dania }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_typy_dan/admin_typ_dania_delete/{{type.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_typy_dan/admin_typ_dania_update/{{type.ID}}">Edytuj</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

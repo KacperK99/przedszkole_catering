@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+{% block content %}
+<div class="topnav">
+	<a href="{% url 'login' %}">Zaloguj się</a>
+	<a href="{% url 'signup' %}">Zarejestruj się</a>
+	<a href="{% url 'mainpage' %}" style="float: left">Catering dla przedszkoli</a>
+</div>
+<div class="login_container">
+	<h1 class="logging_title">Logowanie</h1>
+	<form method="post">
+        {% csrf_token %}
+		<center><input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adres e-mail" required autofocus></center>
+		<center><input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required></center>
+		{% for field in login_form %}
+		<p>
+		{% for error in field.errors %}
+		<p style="color: red">{{ error }}</p>
+		{% endfor %}
+		</p>
+		{% endfor %}
+		{% if login_form.non_field_errors %}
+		<div style="color: red">
+		<p>{{login_form.non_field_errors}}</p>
+		</div>
+		{% endif %}
+		<center><button type="submit">Zaloguj</button></center>
+	</form>
+</div>
+{% endblock %}
+
+</body>
+</html>

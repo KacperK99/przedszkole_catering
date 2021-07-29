@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="searching_container">
+    <form method="GET" action="admin_dania_zestawy">
+        <h1 style="color: white;">Wyszukaj powiązanie zestaw-danie</h1>
+        <input placeholder="Wyszukaj zestaw" name="zestaw">
+        <input placeholder="Wyszukaj danie" name="danie">
+        <button class="set_btn" type="submit">Szukaj</button>
+    </form>
+</div>
+
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_dania_zestawy_add' %}">Dodaj relację zestaw-danie</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Nazwa zestawu</th>
+            <th>Nazwa dania</th>
+            <th>Usuń relację zestaw-danie</th>
+            <th>Edytuj relację zestaw-danie</th>
+        </tr>
+    {% for d_z in dania_zestawy %}
+        <tr>
+            <td>{{ d_z.zestaw.nazwa_zestawu }}</td>
+            <td>{{ d_z.danie.nazwa_dania }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_dania_zestawy/admin_dania_zestawy_delete/{{d_z.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_dania_zestawy/admin_dania_zestawy_update/{{d_z.ID}}">Edytuj</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

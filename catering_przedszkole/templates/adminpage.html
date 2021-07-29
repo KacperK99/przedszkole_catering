@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+    <div class="adminpage_container">
+        <a href="{% url 'admin_skladniki' %}">Zarządzaj składnikami</a>
+        <a href="{% url 'admin_dania' %}">Zarządzaj daniami</a>
+        <a href="{% url 'admin_typy_dan' %}">Zarządzaj typami dań</a>
+        <a href="{% url 'admin_zestawy' %}">Zarządzaj zestawami</a>
+        <a href="{% url 'admin_uzytkownicy' %}">Zarządzaj użytkownikami</a>
+        <a href="{% url 'admin_zamowienia' %}">Zarządzaj zamówieniami</a>
+        <a href="{% url 'admin_skladniki_dania' %}">Zarządzaj przypisaniami składników do dań</a>
+        <a href="{% url 'admin_dania_zestawy' %}">Zarządzaj przypisaniami dań do zestawów</a>
+    </div>
+{% endblock %}
+

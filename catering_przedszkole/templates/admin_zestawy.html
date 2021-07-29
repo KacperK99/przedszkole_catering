@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_zestaw_add' %}">Dodaj zestaw</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Nazwa zestawu</th>
+            <th>Data dostępności zestawu</th>
+            <th>Cena zestawu</th>
+            <th>Usuń zestaw</th>
+            <th>Edytuj zestaw</th>
+            <th>Zmień widoczność zestawu</th>
+        </tr>
+    {% for set in sets %}
+        <tr>
+            <td>{{ set.nazwa_zestawu }}</td>
+            <td>{{ set.data_zestawu }}</td>
+            <td>{{ set.cena_zestawu }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_zestawy/admin_zestaw_delete/{{set.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_zestawy/admin_zestaw_update/{{set.ID}}">Edytuj</a></td>
+            <td style="text-align: center;">Aktualnie: {{ set.status }}<a class="set_btn" style="background-color: rgb(49, 84, 197); float:right; margin-right: 10px;" href="admin_zestawy/admin_zmien_widocznosc/{{set.ID}}">Zmień</a></td>
+        </tr>
+        {% empty %}
+        <tr><td>Brak zestawów</td></tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

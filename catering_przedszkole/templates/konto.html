@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="account_user">
+    <h1>Nazwa użytkownika: {{user.username}}</h1>
+    <h1>Adres e-mail: {{user.email}}</h1>
+    <h1>Numer telefonu: {{user.phone_number}}</h1>
+    <a class="set_btn" style="background-color: rgb(49, 84, 197);" href="edytujkonto/{{user.ID}}">Edytuj dane o koncie</a>
+</div>
+{% endblock %}

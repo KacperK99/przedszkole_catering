@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="set_order" style="width: 50%;">
+    <h1>Zamówienie na: {{zestaw.nazwa_zestawu}}</h1>
+    <h2>Będzie dostarczony dnia {{zestaw.data_zestawu}}</h2>
+    <h2>Cena za 1: {{zestaw.cena_zestawu}} zł</h2>
+    <form enctype="multipart/form-data" method='POST'>
+        {% csrf_token %}
+    <center>
+        <input type="number" name="ilosc_zestawow" id="inputNumber" placeholder="Ilość zestawów" required>
+    </center>
+    <center>
+        <input type="textarea" name="komentarz_zamowienia" id="inputComment" placeholder="Uwagi do zamówienia">
+    </center>
+    <center>
+        <a id="myBtn" class="set_btn">Zamów</a>
+    </center>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h1>Czy na pewno chcesz złożyć zamówienie?</h1>
+          <center>
+            <button type="submit" id="send" class="set_btn">Zamów</button>
+        </center>
+        </div>
+      
+      </div>
+    </form>
+</div>
+{% endblock %}
+

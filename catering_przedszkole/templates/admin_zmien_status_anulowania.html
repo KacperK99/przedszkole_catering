@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="admin_ingridient_container">
+    <form method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+            {% for f in form %}
+            <ul>
+                {{ f.label }} : {{ f }}
+            </ul>
+            {% endfor %}
+        <br/>
+        <div style="border-top: 1px solid; height: 20px;"></div>
+        <button class="set_btn" type="submit">Zapisz</button>  
+    </form>
+</div>
+{% endblock %}

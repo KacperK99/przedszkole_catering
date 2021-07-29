@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+{% for order in orders %}
+<div class="container">
+    <h1 class="my_orders">Nazwa zestawu: {{order.zestaw.nazwa_zestawu}}</h1>
+    <h1 class="my_orders">Data zestawu: {{order.zestaw.data_zestawu}}</h1>
+    <h1 class="my_orders">Data zamówienia: {{order.data_zamowienia}}</h1>
+    <h1 class="my_orders">Ile zestawów zamówiono: {{order.ilosc_zestawow}}</h1>
+    <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację: {{order.status}}</h1>
+    {% if order.komentarz_zamowienia %}
+    <h1 class="my_orders">Komentarz do zamówienia: {{order.komentarz_zamowienia}}</h1>
+    {% else %}
+    <h1 class="my_orders">Komentarz do zamówienia: Brak</h1>
+    {% endif %}
+    {% if not order.czy_anulowano %}
+        {% if not order.czy_potwierdzone %}
+        <a class="set_btn" href="zamowienie_anuluj/{{order.ID}}">Anuluj zamówienie</a>
+        {% endif %}
+    {% else %}
+        <h1 class="my_orders">Twoje zamówienie zostało anulowane.</h1>
+        {% if order.powod_anulowania %}
+            <h1 class="my_orders">Powód anulowania: {{order.powod_anulowania}}</h1>
+        {% endif %}
+    {% endif %}
+    
+</div>
+{% empty %}
+<div class="container">
+    <h1 class="my_orders">Brak zamówień</h1>
+</div>
+{% endfor %}
+
+
+{% if orders.has_other_pages %}
+<ul class="pagination">
+  {% if orders.has_previous %}
+  <li><a href="?page={{orders.previous_page_number}}"><</a></li>
+  {% endif %}
+  {% for i in orders.paginator.page_range %}
+    {% if orders.number == i %}
+      <li>{{ i }} (obecna strona)</li>
+    {% else %}
+      <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+  {% endfor %}
+  {% if orders.has_next %}
+    <li><a href="?page={{orders.next_page_number}}">></a></li>
+  {% endif %}
+</ul>
+{% endif %}
+
+{% endblock %}

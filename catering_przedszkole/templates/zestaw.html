@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="container" style="width: 70%;">
+    <h1>{{singleset.nazwa_zestawu}}</h1>
+    {% for d in data %}
+        <h1 class="single_dish">{{d.danie.typ_dania.nazwa_typu_dania}} - {{d.danie.nazwa_dania}}</h1>
+        <div class="dish_photo"></div>
+        <center><img src="{{ d.danie.zdjecie.url }}" class="dish_img"></center>
+        <p>Posiłek składa się z:</p>
+        {% for i in ing %}
+            {% if d.danie.ID == i.danie.ID %}
+                <p>{{i.skladnik.nazwa_skladnika}}  {{i.skladnik.wielkosc_porcji_skladnika}} g  {{i.skladnik.energia_skladnika_kcal}} kcal</p>
+            {% endif %}
+        {% empty %}
+        <p>Brak składników</p>
+        {% endfor %}
+        <p>  {{d.danie.komentarz}} </p>
+    {% empty %}
+    <p>Brak dań</p>
+    {% endfor %}
+    <h2>Zestaw będzie ważny w dniu {{singleset.data_zestawu}}</h2>
+    <h2>Cena: {{singleset.cena_zestawu}} zł</h2>
+</div>
+
+
+{% endblock %}

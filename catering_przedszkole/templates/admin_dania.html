@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="searching_container">
+    <form method="GET" action="admin_dania">
+        <h1 style="color: white;">Wyszukaj danie</h1>
+        <input placeholder="Wpisz typ dania" name="typ">
+        <input placeholder="Wpisz nazwę dania" name="nazwa">
+        <button class="set_btn" type="submit">Szukaj</button>
+    </form>
+</div>
+
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_danie_add' %}">Dodaj danie</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Zdjęcie</th>
+            <th>Typ dania</th>
+            <th>Nazwa dania</th>
+            <th>Komentarz</th>
+            <th>Usuń danie</th>
+            <th>Edytuj danie</th>
+        </tr>
+    {% for dish in dishes %}
+        <tr>
+            {% if dish.zdjecie %}
+            <td><img class="admin_photo" src="{{ dish.zdjecie.url }}"/></td>
+            {% else %}
+            <td><img class="admin_photo" src="/media/static/brak_zdjecia.png"/></td>
+            {% endif %}
+            <td>{{ dish.typ_dania.nazwa_typu_dania }}</td>
+            <td>{{ dish.nazwa_dania }}</td>
+            <td>{{ dish.komentarz }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_dania/admin_danie_delete/{{dish.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_dania/admin_danie_update/{{dish.ID}}">Edytuj</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<div class="admin_ingridient_container">
+    <a class="set_btn" href="{% url 'admin_skladnik_add' %}">Dodaj składnik</a>
+    <table class="admin_ingridient_table">
+        <tr>
+            <th>Nazwa składnika</th>
+            <th>Wielkość porcji składnika [g]</th>
+            <th>Energia składnika [kcal]</th>
+            <th>Usuń składnik</th>
+            <th>Edytuj składnik</th>
+        </tr>
+    {% for i in ingredients %}
+        <tr>
+            <td>{{ i.nazwa_skladnika }}</td>
+            <td>{{ i.wielkosc_porcji_skladnika }}</td>
+            <td>{{ i.energia_skladnika_kcal }}</td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_skladniki/admin_skladnik_delete/{{i.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_skladniki/admin_skladnik_update/{{i.ID}}">Edytuj</a></td>
+        </tr>
+        {% empty %}
+        <tr><td>Brak składników</td></tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}
