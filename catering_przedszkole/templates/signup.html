@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html>
-<body>
-{% load static %}
-<head>
-    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
-</head>
-<div class="topnav">
-    <a href="{% url 'login' %}">Zaloguj się</a>
-    <a href="{% url 'signup' %}">Zarejestruj się</a>
-    <a href="{% url 'mainpage' %}" style="float: left">Catering dla przedszkoli</a>
-</div>
+{% extends "base.html" %}
+
 {% block content %}
+
 <div class="login_container">
-<h1 class="logging_title">Rejestracja</h1>
-<form acton="catering_przedszkole/signup/" method="post">
-    {% csrf_token %}
-<center>
-    <input type="email" name="email" id="inputEmail" placeholder="Adres e-mail" required autofocus>
+    <h1 class="logging_title">Rejestracja</h1>
+    <form acton="catering_przedszkole/signup/" method="post">
+        {% csrf_token %}
+        <center>
+            <input type="email" name="email" id="inputEmail" placeholder="Adres e-mail" required autofocus>
 
-    <input type="text" name="username" id="inputUsername" placeholder="Nazwa użytkownika" required>
+            <input type="text" name="username" id="inputUsername" placeholder="Nazwa użytkownika" required>
 
-    <input type="text" name="phone_number" id="inputPhoneNumber" placeholder="Numer telefonu" required>
+            <input type="text" name="phone_number" id="inputPhoneNumber" placeholder="Numer telefonu" required>
 
-    <input type="password" name="password1" id="inputPassword1" placeholder="Hasło" required>
+            <input type="password" name="password1" id="inputPassword1" placeholder="Hasło" required>
 
-    <input type="password" name="password2" id="inputPassword2" placeholder="Powtórz hasło" required>
-</center>
-    {% for field in registration_form %}
-    <p>
-        {% for error in field.errors %}
-            <p style="color: red">{{ error }}
+            <input type="password" name="password2" id="inputPassword2" placeholder="Powtórz hasło" required>
+        </center>
+        {% for field in registration_form %}
+        <p>
+            {% for error in field.errors %}
+        <p style="color: red">{{ error }}
+            {% endfor %}
+        </p>
         {% endfor %}
-    </p>
-    {% endfor %}
-    {% if registration_form.non_field_errors %}
-    <div style="color: red">
-        <p>{{registration_form.non_field_errors}}</p>
-    </div>
-    {% endif %}
-    <center><button type="submit">Rejestruj</button></center>
-</form>
+        {% if registration_form.non_field_errors %}
+        <div style="color: red">
+            <p>{{registration_form.non_field_errors}}</p>
+        </div>
+        {% endif %}
+        <center><button type="submit">Rejestruj</button></center>
+    </form>
+</div>
+<div class="signup_login">
+    <center><a href="{% url 'login' %}">Masz już konto? Zaloguj się!</a></center>
 </div>
 {% endblock %}
-
-</body>
-</html>
