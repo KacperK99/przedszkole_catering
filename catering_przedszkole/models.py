@@ -15,23 +15,24 @@ class MyAccountManager(BaseUserManager):
             raise ValueError("Musisz podac adres nazwe uzytkownika.")
         user = self.model(
             email=self.normalize_email(email),
-            username = username,
+            username=username,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, email, username, password):
-        user=self.create_user(
+        user = self.create_user(
             email=self.normalize_email(email),
-            username = username,
-            password = password,
+            username=username,
+            password=password,
         )
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
 
 class Uzytkownik(AbstractBaseUser):
     ID = models.AutoField(primary_key=True)
@@ -42,23 +43,25 @@ class Uzytkownik(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=30)
     username = models.CharField(max_length=50, unique=True)
- 
+    balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    waiting_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+
     objects = MyAccountManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def _str_(self):
         return self.username
-    
+
     def has_perm(self, perm, obj=None):
         return self.is_admin
-    
+
     def has_module_perms(self, app_label):
         return True
-        
+
     def status(self):
-        if self.is_admin==False:
+        if self.is_admin == False:
             return "Nie"
         else:
             return "Tak"
@@ -86,28 +89,27 @@ class Typ_dania(models.Model):
 
 class Danie(models.Model):
     ID = models.AutoField(primary_key=True)
-    typ_dania = models.ForeignKey(Typ_dania, on_delete = models.CASCADE)
+    typ_dania = models.ForeignKey(Typ_dania, on_delete=models.CASCADE)
     nazwa_dania = models.CharField(max_length=100)
-    zdjecie = models.ImageField(upload_to = 'image', blank=True, max_length=300)
+    zdjecie = models.ImageField(upload_to="image", blank=True, max_length=300)
     komentarz = models.TextField(blank=True, null=True)
-    
+
     def __str__(self):
         data = self.nazwa_dania
         return data
 
 
-
 class Skladnik_dania(models.Model):
     ID = models.AutoField(primary_key=True)
-    danie = models.ForeignKey(Danie, on_delete = models.CASCADE)
-    skladnik = models.ForeignKey(Skladnik, on_delete = models.CASCADE)
+    danie = models.ForeignKey(Danie, on_delete=models.CASCADE)
+    skladnik = models.ForeignKey(Skladnik, on_delete=models.CASCADE)
 
 
 class Zestaw(models.Model):
     ID = models.AutoField(primary_key=True)
     nazwa_zestawu = models.CharField(max_length=100)
     data_zestawu = models.DateField()
-    czy_widoczny = models.BooleanField(default = False)
+    czy_widoczny = models.BooleanField(default=False)
     cena_zestawu = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
@@ -115,42 +117,41 @@ class Zestaw(models.Model):
         return data
 
     def status(self):
-        if self.czy_widoczny==False:
+        if self.czy_widoczny == False:
             return "Niewidoczny"
         else:
             return "Widoczny"
 
 
-
 class Zestaw_dan(models.Model):
     ID = models.AutoField(primary_key=True)
-    zestaw = models.ForeignKey(Zestaw, on_delete = models.CASCADE)
-    danie = models.ForeignKey(Danie, on_delete = models.CASCADE)
-
+    zestaw = models.ForeignKey(Zestaw, on_delete=models.CASCADE)
+    danie = models.ForeignKey(Danie, on_delete=models.CASCADE)
 
 
 class Zamowienie(models.Model):
     ID = models.AutoField(primary_key=True)
     data_zamowienia = models.DateTimeField(default=timezone.now)
-    czy_potwierdzone = models.BooleanField(default = False)
+    czy_potwierdzone = models.BooleanField(default=False)
     komentarz_zamowienia = models.TextField(blank=True, null=True)
-    zamawiajacy = models.ForeignKey(Uzytkownik, on_delete = models.CASCADE)
+    zamawiajacy = models.ForeignKey(Uzytkownik, on_delete=models.CASCADE)
     ilosc_zestawow = models.DecimalField(max_digits=5, decimal_places=0, default=1)
-    zestaw = models.ForeignKey(Zestaw, on_delete = models.CASCADE, default=1)
-    czy_anulowano = models.BooleanField(default = False)
+    zestaw = models.ForeignKey(Zestaw, on_delete=models.CASCADE, default=1)
+    czy_anulowano = models.BooleanField(default=False)
     powod_anulowania = models.TextField(blank=True, null=True)
-    
+
     def status(self):
-        if self.czy_potwierdzone==False:
+        if self.czy_potwierdzone == False:
             return "Nie"
         else:
             return "Tak"
-    
+
     def anulowano(self):
-        if self.czy_anulowano==False:
+        if self.czy_anulowano == False:
             return "Nie"
         else:
             return "Tak"
+
 
 @receiver(models.signals.post_delete, sender=Danie)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
@@ -161,6 +162,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.zdjecie:
         if os.path.isfile(instance.zdjecie.path):
             os.remove(instance.zdjecie.path)
+
 
 @receiver(models.signals.pre_save, sender=Danie)
 def auto_delete_file_on_change(sender, instance, **kwargs):

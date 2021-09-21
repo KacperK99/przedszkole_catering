@@ -8,28 +8,37 @@
             <th>Nazwa użytkownika</th>
             <th>E-mail</th>
             <th>Numer telefonu</th>
+            <th>Saldo</th>
             <th>Zamówienia użytkownika</th>
             <th>Usuń użytkownika</th>
             <th>Czy jest administratorem</th>
         </tr>
-    {% for u in users %}
+        {% for u in users %}
         <tr>
             <td>{{ u.username }}</td>
             <td>{{ u.email }}</td>
             <td>{{ u.phone_number }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(57, 204, 106);" href="admin_uzytkownicy/admin_zamowienia_uzytkownika/{{u.ID}}">Sprawdź</a></td>
+            <td style="text-align: center;">{{ u.balance }}
+                <a class="set_btn"
+                    style="background-color: rgb(143, 53, 196);  float:right; margin-right: 10px; margin-left: 10px;"
+                    href="admin_uzytkownicy/admin_edytuj_saldo/{{u.ID}}">Zmień</a>
+            </td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(57, 204, 106);"
+                    href="admin_uzytkownicy/admin_zamowienia_uzytkownika/{{u.ID}}">Sprawdź</a></td>
             {% if user.ID != u.ID %}
-                <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_uzytkownicy/admin_uzytkownik_delete/{{u.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);"
+                    href="admin_uzytkownicy/admin_uzytkownik_delete/{{u.ID}}">Usuń</a></td>
             {% else %}
             <td style="text-align: center;">Nie możesz usunąć siebie</td>
             {% endif %}
             <td style="text-align: center;">Aktualnie: {{ u.status }}
-            {% if user.ID != u.ID %}
-                <a class="set_btn" style="background-color: rgb(49, 84, 197); float:right; margin-right: 10px;" href="admin_uzytkownicy/admin_zmien_prawa/{{u.ID}}">Zmień</a>
-            {% endif %}
+                {% if user.ID != u.ID %}
+                <a class="set_btn" style="background-color: rgb(49, 84, 197); float:right; margin-right: 10px;"
+                    href="admin_uzytkownicy/admin_zmien_prawa/{{u.ID}}">Zmień</a>
+                {% endif %}
             </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

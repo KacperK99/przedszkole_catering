@@ -11,7 +11,7 @@
 <body>
 
     <div class="topnav" id="myTopnav">
-        <a href="{% url 'mainpage' %}" class="first_in_topnav" style="float:left;">Catering dla przedszkoli</a>
+        <a href="{% url 'mainpage' %}" class="first_in_topnav" style="float:left;">Przejdź do strony głównej</a>
         <a href="javascript:void(0);" class="icon" onclick="Hamburger()">
             <i class="fa fa-bars"></i>
         </a>
@@ -22,10 +22,12 @@
         <a href="{% url 'adminpage' %}">Panel Administracyjny</a>
         {% endif %}
         <a href="{% url 'zamowienia' %}">Moje zamówienia</a>
+        <a class="a_back" onclick="history.back()">Wstecz</a>
     </div>
     {% else %}
     <a href="{% url 'login' %}">Zaloguj się</a>
     <a href="{% url 'signup' %}">Zarejestruj się</a>
+    <a onclick="history.back()">Wstecz</a>
     </div>
     {% endif %}
     {% if request.user.is_authenticated %}

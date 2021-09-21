@@ -40,14 +40,17 @@ urlpatterns = [
     path('adminpage/admin_uzytkownicy', views.admin_uzytkownicy_view, name="admin_uzytkownicy"),
     path('adminpage/admin_uzytkownicy/admin_uzytkownik_delete/<int:id_uzytkownika>', views.admin_uzytkownik_delete),
     path('adminpage/admin_uzytkownicy/admin_zmien_prawa/<int:id_uzytkownika>', views.admin_zmien_prawa, name='admin_zmien_prawa'),
+    path('adminpage/admin_uzytkownicy/admin_edytuj_saldo/<int:id_uzytkownika>', views.admin_uzytkownik_zmien_saldo, name='admin_edytuj_saldo'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/<int:id_uzytkownika>', views.admin_zamowienia_uzytkownika, name='admin_zamowienia_uzytkownika'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_zmien_status_potwierdzenia/<int:id_zamowienia>', views.admin_zmien_status_potwierdzenia, name='admin_zmien_status_potwierdzenia'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_zmien_status_anulowania/<int:id_zamowienia>', views.admin_zmien_status_anulowania, name='admin_zmien_status_anulowania'),
+    path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_dodaj_zmien_komentarz1/<int:id_zamowienia>', views.admin_dodaj_zmien_komentarz1, name='admin_dodaj_zmien_komentarz1'),
     
     path('adminpage/admin_zamowienia', views.admin_zamowienia_view, name="admin_zamowienia"),
     path('adminpage/admin_zamowienia/admin_zmien_status_pot/<int:id_zamowienia>', views.admin_zmien_status_pot, name='admin_zmien_status_pot'),
     path('adminpage/admin_zamowienia/admin_zmien_status_anul/<int:id_zamowienia>', views.admin_zmien_status_anul, name='admin_zmien_status_anul'),
-    
+    path('adminpage/admin_zamowienia/admin_dodaj_zmien_komentarz2/<int:id_zamowienia>', views.admin_dodaj_zmien_komentarz2, name='admin_dodaj_zmien_komentarz2'),
+        
     path('adminpage/admin_skladniki_dania', views.admin_skladniki_dania_view, name="admin_skladniki_dania"),
     path('adminpage/admin_skladniki_dania/admin_skladniki_dania_add', views.admin_skladniki_dania_create, name='admin_skladniki_dania_add'),
     path('adminpage/admin_skladniki_dania/admin_skladniki_dania_delete/<int:id_skladniki_dania>', views.admin_skladniki_dania_delete),
