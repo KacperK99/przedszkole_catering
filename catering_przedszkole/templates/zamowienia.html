@@ -20,7 +20,7 @@
   <a class="set_btn" href="zamowienie_anuluj/{{order.ID}}">Anuluj zamówienie</a>
   {% endif %}
   {% else %}
-  <h1 class="my_orders">Twoje zamówienie zostało anulowane.</h1>
+  <h1 class="my_orders" style="color: rgb(179, 21, 21);">Twoje zamówienie zostało anulowane.</h1>
   {% if order.powod_anulowania %}
   <h1 class="my_orders">Powód anulowania: {{order.powod_anulowania}}</h1>
   {% endif %}
