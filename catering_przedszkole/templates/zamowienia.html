@@ -8,7 +8,9 @@
   <h1 class="my_orders">Nazwa zestawu: {{order.zestaw.nazwa_zestawu}}</h1>
   <h1 class="my_orders">Data zestawu: {{order.zestaw.data_zestawu}}</h1>
   <h1 class="my_orders">Data zamówienia: {{order.data_zamowienia}}</h1>
+  <h1 class="my_orders">Cena pojedynczego zestawu: {{order.zestaw.cena_zestawu}} zł</h1>
   <h1 class="my_orders">Ile zestawów zamówiono: {{order.ilosc_zestawow}}</h1>
+  <h1 class="my_orders">Kwota do zapłaty: {{order.do_zaplaty}} zł</h1>
   <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację:
     {% if order.czy_potwierdzone %}
     <span style="color:rgb(49, 84, 197)">{{order.status}}</span>

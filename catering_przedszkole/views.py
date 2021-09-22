@@ -175,16 +175,16 @@ def zamow_view(request, id_zestaw, *args, **kwargs):
     if (request.method == "GET") and request.GET.get("numberInput"):
         com = request.GET.get("commentInput")
         num = request.GET.get("numberInput")
+        pay = float(zestaw_instance.cena_zestawu) * float(num)
         zam = Zamowienie.objects.create(
             komentarz_zamowienia=com,
             zamawiajacy=request.user,
             ilosc_zestawow=num,
             zestaw=zestaw_instance,
+            do_zaplaty=pay,
         )
-        price_for_single_set = float(zam.zestaw.cena_zestawu)
-        price = float(zam.ilosc_zestawow) * price_for_single_set
         actual_waiting_balance = float(zam.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) + float(price)
+        new_waiting_balance = float(actual_waiting_balance) + float(pay)
         user_email = zam.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             waiting_balance=new_waiting_balance
@@ -222,10 +222,8 @@ def zamowienie_anuluj(request, id_zam):
     order.czy_anulowano = True
     order.powod_anulowania = "Anulowano przez użytkownika"
     order.save()
-    price_for_single_set = float(order.zestaw.cena_zestawu)
-    price = float(order.ilosc_zestawow) * price_for_single_set
     actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-    new_waiting_balance = float(actual_waiting_balance) - float(price)
+    new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
     user_email = request.user.email
     user_to_update = Uzytkownik.objects.filter(email=user_email).update(
         waiting_balance=new_waiting_balance
@@ -522,23 +520,19 @@ def admin_zmien_status_potwierdzenia(request, id_zamowienia):
     change_order_confirm_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_potwierdzone == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) - float(price)
+        new_balance = float(actual_balance) - float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) - float(price)
+        new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance, waiting_balance=new_waiting_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) + float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) + float(price)
+        new_waiting_balance = float(actual_waiting_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance, waiting_balance=new_waiting_balance
@@ -554,19 +548,15 @@ def admin_zmien_status_anulowania(request, id_zamowienia):
     change_order_cancel_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_anulowano == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) - float(price)
+        new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             waiting_balance=new_waiting_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) + float(price)
+        new_waiting_balance = float(actual_waiting_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             waiting_balance=new_waiting_balance
@@ -761,23 +751,19 @@ def admin_zmien_status_pot(request, id_zamowienia):
     change_order_confirm_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_potwierdzone == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) - float(price)
+        new_balance = float(actual_balance) - float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) - float(price)
+        new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance, waiting_balance=new_waiting_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) + float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) + float(price)
+        new_waiting_balance = float(actual_waiting_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance, waiting_balance=new_waiting_balance
@@ -793,19 +779,15 @@ def admin_zmien_status_anul(request, id_zamowienia):
     change_order_cancel_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_anulowano == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) - float(price)
+        new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             waiting_balance=new_waiting_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-        new_waiting_balance = float(actual_waiting_balance) + float(price)
+        new_waiting_balance = float(actual_waiting_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             waiting_balance=new_waiting_balance
@@ -879,19 +861,15 @@ def admin_zmien_status_oplacenia(request, id_zamowienia):
     change_order_payment_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_oplacone == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) - float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
@@ -908,20 +886,17 @@ def admin_zmien_status_oplac(request, id_zamowienia):
     change_order_payment_status(request, id_zamowienia)
     order = get_order_by_id(request, id_zamowienia)
     if order.czy_oplacone == True:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) + float(order.do_zaplaty)
         user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance
         )
     else:
-        price_for_single_set = float(order.zestaw.cena_zestawu)
-        price = float(order.ilosc_zestawow) * price_for_single_set
         actual_balance = float(order.zamawiajacy.balance)
-        new_balance = float(actual_balance) + float(price)
+        new_balance = float(actual_balance) - float(order.do_zaplaty)
         actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
+        user_email = order.zamawiajacy.email
         user_to_update = Uzytkownik.objects.filter(email=user_email).update(
             balance=new_balance
         )

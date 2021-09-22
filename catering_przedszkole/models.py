@@ -140,6 +140,7 @@ class Zamowienie(models.Model):
     czy_anulowano = models.BooleanField(default=False)
     powod_anulowania = models.TextField(blank=True, null=True)
     czy_oplacone = models.BooleanField(default=False)
+    do_zaplaty = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
     def status(self):
         if self.czy_potwierdzone == False:
