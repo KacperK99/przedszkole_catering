@@ -9,7 +9,20 @@
   <h1 class="my_orders">Data zestawu: {{order.zestaw.data_zestawu}}</h1>
   <h1 class="my_orders">Data zamówienia: {{order.data_zamowienia}}</h1>
   <h1 class="my_orders">Ile zestawów zamówiono: {{order.ilosc_zestawow}}</h1>
-  <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację: {{order.status}}</h1>
+  <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację:
+    {% if order.czy_potwierdzone %}
+    <span style="color:rgb(49, 84, 197)">{{order.status}}</span>
+    {% else %}
+    <span style="color:rgb(241, 63, 57)">{{order.status}}</span>
+    {% endif %}
+  </h1>
+  <h1 class="my_orders">Czy wpłynęła opłata za zamówienie:
+    {% if order.czy_oplacone %}
+    <span style="color:rgb(49, 84, 197)">{{order.oplacono}}</span>
+    {% else %}
+    <span style="color:rgb(241, 63, 57)">{{order.oplacono}}</span>
+    {% endif %}
+  </h1>
   {% if order.komentarz_zamowienia %}
   <h1 class="my_orders">Komentarz do zamówienia: {{order.komentarz_zamowienia}}</h1>
   {% else %}
