@@ -43,11 +43,13 @@ urlpatterns = [
     path('adminpage/admin_uzytkownicy/admin_edytuj_saldo/<int:id_uzytkownika>', views.admin_uzytkownik_zmien_saldo, name='admin_edytuj_saldo'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/<int:id_uzytkownika>', views.admin_zamowienia_uzytkownika, name='admin_zamowienia_uzytkownika'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_zmien_status_potwierdzenia/<int:id_zamowienia>', views.admin_zmien_status_potwierdzenia, name='admin_zmien_status_potwierdzenia'),
+    path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_zmien_status_oplacenia/<int:id_zamowienia>', views.admin_zmien_status_oplacenia, name='admin_zmien_status_oplacenia'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_zmien_status_anulowania/<int:id_zamowienia>', views.admin_zmien_status_anulowania, name='admin_zmien_status_anulowania'),
     path('adminpage/admin_uzytkownicy/admin_zamowienia_uzytkownika/admin_dodaj_zmien_komentarz1/<int:id_zamowienia>', views.admin_dodaj_zmien_komentarz1, name='admin_dodaj_zmien_komentarz1'),
     
     path('adminpage/admin_zamowienia', views.admin_zamowienia_view, name="admin_zamowienia"),
     path('adminpage/admin_zamowienia/admin_zmien_status_pot/<int:id_zamowienia>', views.admin_zmien_status_pot, name='admin_zmien_status_pot'),
+    path('adminpage/admin_zamowienia/admin_zmien_status_oplac/<int:id_zamowienia>', views.admin_zmien_status_oplac, name='admin_zmien_status_oplac'),
     path('adminpage/admin_zamowienia/admin_zmien_status_anul/<int:id_zamowienia>', views.admin_zmien_status_anul, name='admin_zmien_status_anul'),
     path('adminpage/admin_zamowienia/admin_dodaj_zmien_komentarz2/<int:id_zamowienia>', views.admin_dodaj_zmien_komentarz2, name='admin_dodaj_zmien_komentarz2'),
         

@@ -139,6 +139,7 @@ class Zamowienie(models.Model):
     zestaw = models.ForeignKey(Zestaw, on_delete=models.CASCADE, default=1)
     czy_anulowano = models.BooleanField(default=False)
     powod_anulowania = models.TextField(blank=True, null=True)
+    czy_oplacone = models.BooleanField(default=False)
 
     def status(self):
         if self.czy_potwierdzone == False:
@@ -148,6 +149,12 @@ class Zamowienie(models.Model):
 
     def anulowano(self):
         if self.czy_anulowano == False:
+            return "Nie"
+        else:
+            return "Tak"
+
+    def oplacono(self):
+        if self.czy_oplacone == False:
             return "Nie"
         else:
             return "Tak"

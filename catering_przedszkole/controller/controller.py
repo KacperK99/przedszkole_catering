@@ -167,3 +167,13 @@ def get_all_sets_dishes(request):
 def get_set_dish_by_id(request, id_dania_zestawy):
     data = Zestaw_dan.objects.get(ID=id_dania_zestawy)
     return data
+
+
+def change_order_payment_status(request, id_zamowienia):
+    id_zamowienia = int(id_zamowienia)
+    order = Zamowienie.objects.get(pk=id_zamowienia)
+    if order.czy_oplacone == True:
+        order.czy_oplacone = False
+    else:
+        order.czy_oplacone = True
+    order.save()

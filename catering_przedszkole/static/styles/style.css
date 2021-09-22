@@ -298,7 +298,7 @@ body {
 }
 
 .my_orders {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .delete_order {
@@ -564,4 +564,15 @@ th {
 
 .a_back {
   cursor: pointer;
+}
+
+.select-box{
+  margin-right: 25px;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.searching_header{
+  font-size: 22px;
+  color: #f2f2f2;
 }

@@ -49,6 +49,7 @@ from catering_przedszkole.controller.controller import (
     get_user_orders_by_id,
     change_order_confirm_status,
     change_order_cancel_status,
+    change_order_payment_status,
     get_all_orders,
     get_ingridient_dish_by_id,
     get_all_ingridients_dishes,
@@ -580,6 +581,26 @@ def admin_zamowienia_view(request):
         return redirect("mainpage")
     orders = get_all_orders(request)
 
+    confirmed_query = request.GET.get("confirmed")
+    canceled_query = request.GET.get("canceled")
+    paid_query = request.GET.get("paid")
+    username_query = request.GET.get("username")
+    email_query = request.GET.get("email")
+    if (
+        confirmed_query != ""
+        and confirmed_query != "---"
+        and confirmed_query is not None
+    ):
+        orders = orders.filter(czy_potwierdzone__icontains=confirmed_query.strip())
+    if canceled_query != "" and canceled_query != "---" and canceled_query is not None:
+        orders = orders.filter(czy_anulowano__icontains=canceled_query.strip())
+    if paid_query != "" and paid_query != "---" and paid_query is not None:
+        orders = orders.filter(czy_oplacone__icontains=paid_query.strip())
+    if username_query != "" and username_query is not None:
+        orders = orders.filter(zamawiajacy__username__icontains=username_query.strip())
+    if email_query != "" and email_query is not None:
+        orders = orders.filter(zamawiajacy__email__icontains=email_query.strip())
+
     page = request.GET.get("page", 1)
     paginator = Paginator(orders, 10)
     try:
@@ -848,3 +869,60 @@ def admin_dodaj_zmien_komentarz2(request, id_zamowienia):
         form.save()
         return redirect("admin_zamowienia")
     return render(request, "admin_dodaj_zmien_komentarz1.html", {"comment": form})
+
+
+def admin_zmien_status_oplacenia(request, id_zamowienia):
+    if request.user.is_anonymous == True:
+        return redirect("login")
+    elif request.user.is_admin == False:
+        return redirect("mainpage")
+    change_order_payment_status(request, id_zamowienia)
+    order = get_order_by_id(request, id_zamowienia)
+    if order.czy_oplacone == True:
+        price_for_single_set = float(order.zestaw.cena_zestawu)
+        price = float(order.ilosc_zestawow) * price_for_single_set
+        actual_balance = float(order.zamawiajacy.balance)
+        new_balance = float(actual_balance) + float(price)
+        user_email = order.zamawiajacy.email
+        user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+            balance=new_balance
+        )
+    else:
+        price_for_single_set = float(order.zestaw.cena_zestawu)
+        price = float(order.ilosc_zestawow) * price_for_single_set
+        actual_balance = float(order.zamawiajacy.balance)
+        new_balance = float(actual_balance) + float(price)
+        actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
+        user_email = order.zamawiajacy.email
+        user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+            balance=new_balance
+        )
+    return redirect("admin_zamowienia_uzytkownika", id_uzytkownika=order.zamawiajacy.ID)
+
+
+def admin_zmien_status_oplac(request, id_zamowienia):
+    if request.user.is_anonymous == True:
+        return redirect("login")
+    elif request.user.is_admin == False:
+        return redirect("mainpage")
+    change_order_payment_status(request, id_zamowienia)
+    order = get_order_by_id(request, id_zamowienia)
+    if order.czy_oplacone == True:
+        price_for_single_set = float(order.zestaw.cena_zestawu)
+        price = float(order.ilosc_zestawow) * price_for_single_set
+        actual_balance = float(order.zamawiajacy.balance)
+        new_balance = float(actual_balance) + float(price)
+        user_email = order.zamawiajacy.email
+        user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+            balance=new_balance
+        )
+    else:
+        price_for_single_set = float(order.zestaw.cena_zestawu)
+        price = float(order.ilosc_zestawow) * price_for_single_set
+        actual_balance = float(order.zamawiajacy.balance)
+        new_balance = float(actual_balance) + float(price)
+        actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
+        user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+            balance=new_balance
+        )
+    return redirect("admin_zamowienia")

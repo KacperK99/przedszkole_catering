@@ -2,6 +2,40 @@
 
 {% block content %}
 {% csrf_token %}
+
+
+<div class="searching_container">
+  <h1 class="searching_header">Wyszukaj zamówienie</h1>
+  <form method=" GET" action="admin_zamowienia">
+    <div style="padding-bottom: 10px;">
+      <label style="color: white;">Zamówienie potwierdzono: </label>
+      <select name="confirmed" class="select-box">
+        <option value="---">---</option>
+        <option value="True">Tak</option>
+        <option value="False">Nie</option>
+      </select>
+      <label style="color: white;">Zamówienie anulowano: </label>
+      <select name="canceled" class="select-box">
+        <option value="---">---</option>
+        <option value="True">Tak</option>
+        <option value="False">Nie</option>
+      </select>
+      <label style="color: white;">Zamówienie opłacono: </label>
+      <select name="paid" class="select-box">
+        <option value="---">---</option>
+        <option value="True">Tak</option>
+        <option value="False">Nie</option>
+      </select>
+    </div>
+    <div>
+      <input placeholder="Nazwa użytkownika" name="username">
+      <input placeholder="Adres e-mail" name="email">
+    </div>
+    <button class="set_btn" type="submit">Szukaj</button>
+  </form>
+</div>
+
+
 {% for order in orders %}
 <div class="container">
   <h1 class="my_orders">Zamówienia dokonał użytkownik "{{order.zamawiajacy.username}}" o adresie e-mail
@@ -15,18 +49,39 @@
   {% else %}
   <h1 class="my_orders">Komentarz do zamówienia: Brak</h1>
   {% endif %}
-  <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację: {{order.status}}</h1>
-  <h1 class="my_orders">Czy zamówienie anulowano: {{order.anulowano}}</h1>
+  <h1 class="my_orders">Czy zamówienie zostało potwierdzone przez administrację:
+    {% if order.czy_potwierdzone %}
+    <span style="color:rgb(49, 84, 197)">{{order.status}}</span>
+    {% else %}
+    <span style="color:rgb(241, 63, 57)">{{order.status}}</span>
+    {% endif %}
+  </h1>
+  <h1 class="my_orders">Czy zamówienie anulowano:
+    {% if order.czy_anulowano %}
+    <span style="color:rgb(49, 84, 197)">{{order.anulowano}}</span>
+    {% else %}
+    <span style="color:rgb(241, 63, 57)">{{order.anulowano}}</span>
+    {% endif %}
+  </h1>
+  <h1 class="my_orders">Czy zamówienie zostało opłacone:
+    {% if order.czy_oplacone %}
+    <span style="color:rgb(49, 84, 197)">{{order.oplacono}}</span>
+    {% else %}
+    <span style="color:rgb(241, 63, 57)">{{order.oplacono}}</span>
+    {% endif %}
+  </h1>
   {% if order.czy_potwierdzone %}
   <a class="set_btn" style="background-color: rgb(49, 84, 197);"
     href="admin_zamowienia/admin_zmien_status_pot/{{order.ID}}">Zmień status potwierdzenia</a>
+  <a class="set_btn" style="background-color: rgb(59, 195, 236);"
+    href="admin_zamowienia/admin_zmien_status_oplac/{{order.ID}}">Zmień status opłacenia zamówienia</a>
   {% else %}
   {% if not order.czy_anulowano %}<a class="set_btn" style="background-color: rgb(49, 84, 197);"
     href="admin_zamowienia/admin_zmien_status_pot/{{order.ID}}">Zmień status potwierdzenia</a>
-  <a class="set_btn" style="background-color: rgb(49, 84, 197); "
+  <a class="set_btn" style="background-color: rgb(241, 63, 57); "
     href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
   {% else %}
-  <a class="set_btn" style="background-color: rgb(49, 84, 197); "
+  <a class="set_btn" style="background-color: rgb(241, 63, 57); "
     href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
   {% if order.powod_anulowania %}
   <h1 class="my_orders">Powód anulowania: {{order.powod_anulowania}}</h1>
