@@ -12,6 +12,7 @@ urlpatterns = [
     path('mainpage/zamowienia/', views.zamowienia_view, name="zamowienia"),
     path('mainpage/konto/', views.mojekonto_view, name="konto"),
     path('mainpage/konto/edytujkonto/<int:id_uzytkownika>', views.mojekonto_update, name="edytujkonto"),
+    path('mainpage/zamowienia/edytujzamowienie/<int:id_zamowienia>', views.zamowienie_update, name="edytujzamowienie"),
     path('mainpage/zamowienia/zamowienie_anuluj/<int:id_zam>', views.zamowienie_anuluj),
 
     path('adminpage/', views.adminpage_view, name="adminpage"),

@@ -157,11 +157,20 @@ body {
     width: 80% !important;
   }
   .set_btn {
-    font-size: 25px !important;
+    font-size: 21px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     padding-left: 17px !important;
     padding-right: 17px !important;
+    margin-top:5px !important;
+  }
+  .zamowienie_btn {
+    font-size: 21px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+    margin-top:5px !important;
   }
   .admin_ingridient_container {
     width: 96% !important;
@@ -191,7 +200,7 @@ body {
     padding-bottom: 20px !important;
   }
   .my_orders {
-    font-size: 14px !important;
+    font-size: 19px !important;
   }
 }
 @media screen and (max-width: 1300px) {
@@ -575,4 +584,47 @@ th {
 .searching_header{
   font-size: 22px;
   color: #f2f2f2;
+}
+
+.zamowienie_table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  background-color: rgb(39, 39, 39);
+  margin-top: 20px;
+  color:rgb(230, 230, 230);
+  font-size: 17px;
+}
+
+.zamowienie_table td,
+th {
+  border: 1px solid black;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.zamowienie_table th {
+  text-align: center;
+}
+
+.zamowienie_table tr:nth-child(even) {
+  background-color: rgb(85, 85, 85);
+}
+
+
+.zamowienie_btn {
+  border: none;
+  color: #f2f2f2;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
 }

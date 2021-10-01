@@ -136,3 +136,13 @@ class AdminDodajZmienKomentarzAnulowania(forms.ModelForm):
         labels = {
             "powod_anulowania": "Powód anulowania zamówienia",
         }
+
+
+class ZamowienieEdit(forms.ModelForm):
+    class Meta:
+        model = Zamowienie
+        fields = ("ilosc_zestawow", "komentarz_zamowienia")
+        labels = {
+            "ilosc_zestawow": "Ilość zamówionych zestawów",
+            "komentarz_zamowienia": "Komentarz do zamówienia",
+        }

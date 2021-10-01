@@ -6,7 +6,7 @@
 <div class="set_order" style="width: 50%;">
     <h1>Zamówienie na: {{zestaw.nazwa_zestawu}}</h1>
     <h2>Będzie dostarczony dnia {{zestaw.data_zestawu}}</h2>
-    <h2>Cena za 1: {{zestaw.cena_zestawu}} zł</h2>
+    <h2>Cena za jeden zestaw: {{zestaw.cena_zestawu}} zł</h2>
     <form enctype="multipart/form-data" method='POST'>
         {% csrf_token %}
         <center>

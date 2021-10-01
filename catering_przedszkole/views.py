@@ -16,6 +16,7 @@ from .forms import (
     UzytkownikEdit,
     UzytkownikEditSaldo,
     AdminDodajZmienKomentarzAnulowania,
+    ZamowienieEdit,
 )
 from catering_przedszkole.models import (
     Uzytkownik,
@@ -137,10 +138,11 @@ def zestaw_view(request, id_zestaw):
         return redirect("mainpage")
     data = get_data_of_sets_by_id(request, id_zestaw)
     ingridients = get_data_of_ingredients(request)
+    today = date.today()
     return render(
         request,
         "zestaw.html",
-        {"singleset": singleset, "data": data, "ing": ingridients},
+        {"singleset": singleset, "data": data, "ing": ingridients, "today": today},
     )
 
 
@@ -901,3 +903,39 @@ def admin_zmien_status_oplac(request, id_zamowienia):
             balance=new_balance
         )
     return redirect("admin_zamowienia")
+
+
+def zamowienie_update(request, id_zamowienia):
+    if request.user.is_anonymous == True:
+        return redirect("login")
+    try:
+        order = get_order_by_id(request, id_zamowienia)
+        amount_before_update = order.ilosc_zestawow
+    except order.DoesNotExist:
+        return redirect("mainpage")
+    if request.user.ID != order.zamawiajacy.ID:
+        return redirect("mainpage")
+    form = ZamowienieEdit(request.POST or None, request.FILES or None, instance=order)
+    if form.is_valid():
+        form.save()
+        order = get_order_by_id(request, id_zamowienia)
+        amount_after_update = order.ilosc_zestawow
+        if amount_before_update != amount_after_update:
+            amount_to_update = amount_before_update - amount_after_update
+            actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
+            new_price = float(amount_after_update) * float(order.zestaw.cena_zestawu)
+            difference_prices = float(amount_to_update) * float(
+                order.zestaw.cena_zestawu
+            )
+            new_waiting_balance = float(actual_waiting_balance) - float(
+                difference_prices
+            )
+            user_email = order.zamawiajacy.email
+            user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+                waiting_balance=new_waiting_balance
+            )
+            order_to_update = Zamowienie.objects.filter(ID=id_zamowienia).update(
+                do_zaplaty=new_price
+            )
+        return redirect("zamowienia")
+    return render(request, "edytujzamowienie.html", {"edit_order": form})
