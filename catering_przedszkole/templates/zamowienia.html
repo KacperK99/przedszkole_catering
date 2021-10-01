@@ -2,7 +2,7 @@
 
 {% block content %}
 {% csrf_token %}
-
+<h1 class="my_orders_header">Moje zamówienia</h1>
 {% for order in orders %}
 <div class="container" style="padding-bottom: 18px;">
   <table class="zamowienie_table">

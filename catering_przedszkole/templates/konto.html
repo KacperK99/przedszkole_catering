@@ -4,12 +4,26 @@
 {% csrf_token %}
 
 <div class="account_user">
-    <h1>Nazwa użytkownika: {{user.username}}</h1>
-    <h1>Adres e-mail: {{user.email}}</h1>
-    <h1>Numer telefonu: {{user.phone_number}}</h1>
-    <h1>Moje saldo: {{user.balance}} zł</h1>
-    <h1>Watrość zamówień oczekujących na potwierdzenie: {{user.waiting_balance}} zł</h1>
-    <a class="set_btn" style="background-color: rgb(49, 84, 197);" href="edytujkonto/{{user.ID}}">Edytuj dane o
+    <table class="zamowienie_table">
+        <th>Nazwa użytkownika</th>
+        <th>E-mail</th>
+        <th>Numer telefonu</th>
+        </tr>
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Wartość zamówień oczekujących na zatwierdzenie</th>
+            <th colspan="1">Moje saldo</th>
+        </tr>
+        <tr>
+            <td colspan="2">{{user.waiting_balance}} zł</td>
+            <td colspan="1">{{user.balance}} zł</td>
+        </tr>
+    </table>
+    <a class="zamowienie_btn" style="background-color: rgb(49, 84, 197);" href="edytujkonto/{{user.ID}}">Edytuj dane o
         koncie</a>
 </div>
 {% endblock %}
