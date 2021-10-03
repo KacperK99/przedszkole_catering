@@ -65,9 +65,9 @@
   </table>
   {% if not order.czy_anulowano %}
   {% if not order.czy_potwierdzone %}
-  <a class="zamowienie_btn" style="background-color: rgb(179, 21, 21);" href="zamowienie_anuluj/{{order.ID}}">Anuluj
+  <a class="zamowienie_red_btn" href="zamowienie_anuluj/{{order.ID}}">Anuluj
     zamówienie</a>
-  <a class="zamowienie_btn" style="background-color: rgb(27, 45, 209);" href="edytujzamowienie/{{order.ID}}">Edytuj
+  <a class="zamowienie_blue_btn" href="edytujzamowienie/{{order.ID}}">Edytuj
     zamówienie</a>
   {% endif %}
   {% else %}

@@ -21,14 +21,16 @@
             <th>Usuń relację zestaw-danie</th>
             <th>Edytuj relację zestaw-danie</th>
         </tr>
-    {% for d_z in dania_zestawy %}
+        {% for d_z in dania_zestawy %}
         <tr>
             <td>{{ d_z.zestaw.nazwa_zestawu }}</td>
             <td>{{ d_z.danie.nazwa_dania }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_dania_zestawy/admin_dania_zestawy_delete/{{d_z.ID}}">Usuń</a></td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_dania_zestawy/admin_dania_zestawy_update/{{d_z.ID}}">Edytuj</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(207, 39, 39);"
+                    href="admin_dania_zestawy/admin_dania_zestawy_delete/{{d_z.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(33, 72, 199);"
+                    href="admin_dania_zestawy/admin_dania_zestawy_update/{{d_z.ID}}">Edytuj</a></td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

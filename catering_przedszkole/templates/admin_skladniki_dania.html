@@ -20,14 +20,16 @@
             <th>Usuń relację składnik-danie</th>
             <th>Edytuj relację składnik-danie</th>
         </tr>
-    {% for s_d in skladniki_dania %}
+        {% for s_d in skladniki_dania %}
         <tr>
             <td>{{ s_d.danie.nazwa_dania }}</td>
             <td>{{ s_d.skladnik.nazwa_skladnika }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_skladniki_dania/admin_skladniki_dania_delete/{{s_d.ID}}">Usuń</a></td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_skladniki_dania/admin_skladniki_dania_update/{{s_d.ID}}">Edytuj</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(207, 39, 39);"
+                    href="admin_skladniki_dania/admin_skladniki_dania_delete/{{s_d.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(33, 72, 199);"
+                    href="admin_skladniki_dania/admin_skladniki_dania_update/{{s_d.ID}}">Edytuj</a></td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

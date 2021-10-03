@@ -13,18 +13,24 @@
             <th>Edytuj zestaw</th>
             <th>Zmień widoczność zestawu</th>
         </tr>
-    {% for set in sets %}
+        {% for set in sets %}
         <tr>
             <td>{{ set.nazwa_zestawu }}</td>
             <td>{{ set.data_zestawu }}</td>
             <td>{{ set.cena_zestawu }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_zestawy/admin_zestaw_delete/{{set.ID}}">Usuń</a></td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_zestawy/admin_zestaw_update/{{set.ID}}">Edytuj</a></td>
-            <td style="text-align: center;">Aktualnie: {{ set.status }}<a class="set_btn" style="background-color: rgb(49, 84, 197); float:right; margin-right: 10px;" href="admin_zestawy/admin_zmien_widocznosc/{{set.ID}}">Zmień</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(207, 39, 39);"
+                    href="admin_zestawy/admin_zestaw_delete/{{set.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(33, 72, 199);"
+                    href="admin_zestawy/admin_zestaw_update/{{set.ID}}">Edytuj</a></td>
+            <td style="text-align: center;">Aktualnie: {{ set.status }}<a class="set_btn"
+                    style="background-color: rgb(130, 19, 194); float:right; margin-right: 10px;"
+                    href="admin_zestawy/admin_zmien_widocznosc/{{set.ID}}">Zmień</a></td>
         </tr>
         {% empty %}
-        <tr><td>Brak zestawów</td></tr>
-    {% endfor %}
+        <tr>
+            <td>Brak zestawów</td>
+        </tr>
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

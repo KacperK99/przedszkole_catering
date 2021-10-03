@@ -116,25 +116,23 @@
   </table>
 
   {% if order.czy_potwierdzone %}
-  <a class="zamowienie_btn" style="background-color: rgb(27, 45, 209);"
-    href="admin_zamowienia/admin_zmien_status_pot/{{order.ID}}">Zmień status potwierdzenia</a>
-  <a class="zamowienie_btn" style="background-color: rgb(22, 186, 236);"
-    href="admin_zamowienia/admin_zmien_status_oplac/{{order.ID}}">Zmień status opłacenia zamówienia</a>
+  <a class="zamowienie_blue_btn" href="admin_zamowienia/admin_zmien_status_pot/{{order.ID}}">Zmień status
+    potwierdzenia</a>
+  <a class="zamowienie_light_blue_btn" href="admin_zamowienia/admin_zmien_status_oplac/{{order.ID}}">Zmień status
+    opłacenia zamówienia</a>
   {% else %}
-  {% if not order.czy_anulowano %}<a class="zamowienie_btn" style="background-color: rgb(27, 45, 209);"
+  {% if not order.czy_anulowano %}<a class="zamowienie_blue_btn"
     href="admin_zamowienia/admin_zmien_status_pot/{{order.ID}}">Zmień status potwierdzenia</a>
-  <a class="zamowienie_btn" style="background-color: rgb(179, 21, 21);"
-    href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
+  <a class="zamowienie_red_btn" href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
   {% else %}
-  <a class="zamowienie_btn" style="background-color: rgb(179, 21, 21);"
-    href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
+  <a class="zamowienie_red_btn" href="admin_zamowienia/admin_zmien_status_anul/{{order.ID}}">Zmień status anulowania</a>
   {% if order.powod_anulowania %}
   <h1 class="my_orders">Powód anulowania: {{order.powod_anulowania}}</h1>
   {% else %}
   <h1 class="my_orders">Powód anulowania: Brak</h1>
   {% endif %}
-  <a class="zamowienie_btn" style="background-color: rgb(130, 19, 194);"
-    href="admin_zamowienia/admin_dodaj_zmien_komentarz2/{{order.ID}}">Dodaj/Zmień komentarz do anulowania</a>
+  <a class="zamowienie_purple_btn" href="admin_zamowienia/admin_dodaj_zmien_komentarz2/{{order.ID}}">Dodaj/Zmień
+    komentarz do anulowania</a>
   {% endif %}
   {% endif %}
 </div>
