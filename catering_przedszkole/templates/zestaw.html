@@ -2,12 +2,25 @@
 
 {% block content %}
 {% csrf_token %}
+
+
 <div class="container" style="width: 70%;">
     <h1>{{singleset.nazwa_zestawu}}</h1>
+    <div id="slideshow">
+        {% for d in data %}
+        <div>
+            {% if d.danie.zdjecie %}
+            <img class="dish_slide" src="{{ d.danie.zdjecie.url }}" />
+            <label class="slide_label">{{d.danie.nazwa_dania}}</label>
+            {% else %}
+            <img class="dish_slide" src="/media/static/brak_zdjecia.png" />
+            <label class="slide_label">{{d.danie.nazwa_dania}}</label>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
     {% for d in data %}
     <h1 class="single_dish">{{d.danie.typ_dania.nazwa_typu_dania}} - {{d.danie.nazwa_dania}}</h1>
-    <div class="dish_photo"></div>
-    <center><img src="{{ d.danie.zdjecie.url }}" class="dish_img"></center>
     <p>Posiłek składa się z:</p>
     {% for i in ing %}
     {% if d.danie.ID == i.danie.ID %}
@@ -29,5 +42,16 @@
         <h2>Cena: {{singleset.cena_zestawu}} zł</h2>
 </div>
 
+<script>
+    $("#slideshow > div:gt(0)").hide();
 
+    setInterval(function () {
+        $('#slideshow > div:first')
+            .fadeOut(700)
+            .next()
+            .fadeIn(700)
+            .end()
+            .appendTo('#slideshow');
+    }, 5000);
+</script>
 {% endblock %}

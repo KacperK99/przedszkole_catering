@@ -3,6 +3,19 @@
 {% block content %}
 {% csrf_token %}
 
+<div class="mainpage_image_container" style="background-image: url('/media/static/mainpage_image.jpg');">
+    <div class="mainpage_image_inside_container">
+        <h1>Catering dla przedszkoli i żłobków</h1>
+        <div class="mainpage_paragraph">
+            <p>Znajdziesz tu oferty cateringowe skierowanych do przedszkoli i żłobków. Parę kliknięć dzieli Cię od
+                zamówienia podopiecznym pysznego jedzenia! W razie pytań kontaktuj się z nami poprzez email:
+                xxx@gmail.com
+                lub telefonicznie: XXX XXX XXX.
+                Smacznego!</p>
+        </div>
+    </div>
+</div>
+
 {% for set in sets %}
 <div class="set_mainpage">
     <div class='left_set_mainpage'>
