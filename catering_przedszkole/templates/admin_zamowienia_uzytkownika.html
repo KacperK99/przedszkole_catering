@@ -113,7 +113,7 @@
     {% endif %}
     {% for i in user_orders.paginator.page_range %}
     {% if user_orders.number == i %}
-    <li>{{ i }} (obecna strona)</li>
+    <li class="pagination_actual">{{ i }}</li>
     {% else %}
     <li><a href="?page={{ i }}">{{ i }}</a></li>
     {% endif %}
