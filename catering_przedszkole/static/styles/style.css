@@ -191,6 +191,14 @@ body, html{
     padding-right: 17px !important;
     margin-top:5px !important;
   }
+  .set_btn_back{
+    font-size: 21px !important;
+    padding-top: 6px !important;
+    padding-bottom: 10px !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+    margin-top:5px !important;
+  }
   .zamowienie_blue_btn {
     font-size: 21px !important;
     padding-top: 10px !important;
@@ -282,7 +290,8 @@ body, html{
   font-size: 16px;
 }
 
-.set_btn {
+.set_btn,
+.set_btn_back {
   background-color: rgb(90, 90, 90);
   border: none;
   color: #f2f2f2;
@@ -299,8 +308,13 @@ body, html{
   transition: 0.5s;
   border-radius: 5px;
 }
+.set_btn_back{
+  padding-top: 3px;
+  padding-bottom:8px
+}
 
-.set_btn:hover {
+.set_btn:hover,
+.set_btn_back:hover {
   background-color: #333;
   box-shadow: 0px 15px 25px -5px rgba();
   transform: scale(1.05);
@@ -408,6 +422,8 @@ body, html{
   padding-right: 20px;
   margin-bottom: 25px;
   margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .container {
@@ -485,6 +501,8 @@ th {
   background-color: rgb(72, 204, 90);
   padding: 20px;
   margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .adminpage_container a {
@@ -543,10 +561,6 @@ th {
   border: 1px solid #888;
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s;
 }
 
 .modal {

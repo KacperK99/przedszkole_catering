@@ -12,17 +12,21 @@
             <th>Usuń składnik</th>
             <th>Edytuj składnik</th>
         </tr>
-    {% for i in ingredients %}
+        {% for i in ingredients %}
         <tr>
             <td>{{ i.nazwa_skladnika }}</td>
             <td>{{ i.wielkosc_porcji_skladnika }}</td>
             <td>{{ i.energia_skladnika_kcal }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_skladniki/admin_skladnik_delete/{{i.ID}}">Usuń</a></td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_skladniki/admin_skladnik_update/{{i.ID}}">Edytuj</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);"
+                    href="admin_skladniki/admin_skladnik_delete/{{i.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);"
+                    href="admin_skladniki/admin_skladnik_update/{{i.ID}}">Edytuj</a></td>
         </tr>
         {% empty %}
-        <tr><td>Brak składników</td></tr>
-    {% endfor %}
+        <tr>
+            <td>Brak składników</td>
+        </tr>
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

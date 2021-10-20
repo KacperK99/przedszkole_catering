@@ -3,16 +3,17 @@
 {% block content %}
 {% csrf_token %}
 <div class="admin_ingridient_container">
-    <form method = 'POST' enctype="multipart/form-data">
+    <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-            {% for d_z in add_danie_zestaw %}
-            <ul>
-                {{ d_z.label }} : {{ d_z }}
-            </ul>
-            {% endfor %}
-        <br/>
+        {% for d_z in add_danie_zestaw %}
+        <ul>
+            {{ d_z.label }} : {{ d_z }}
+        </ul>
+        {% endfor %}
+        <br />
         <div style="border-top: 1px solid; height: 20px;"></div>
-        <button class="set_btn" type="submit">Zapisz</button>  
+        <button class="set_btn" type="submit">Zapisz</button>
+        <a href="/catering_przedszkole/adminpage/admin_dania_zestawy" class="set_btn_back">Anuluj</a>
     </form>
 </div>
 {% endblock %}

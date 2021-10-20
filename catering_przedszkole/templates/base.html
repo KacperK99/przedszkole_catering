@@ -33,16 +33,6 @@
     </div>
     {% endif %}
     {% if request.user.is_authenticated %}
-    {% if request.path == '/catering_przedszkole/mainpage/' %}
-    <div class="naglowek">
-        <p>Zalogowano jako {{user.username}}</p>
-    </div>
-    {% else %}
-    <div class="naglowek">
-        <p>Zalogowano jako {{user.username}}</p>
-    </div>
-    <br>
-    {% endif %}
     {% endif %}
     {% block content %}{% endblock %}
     </div>

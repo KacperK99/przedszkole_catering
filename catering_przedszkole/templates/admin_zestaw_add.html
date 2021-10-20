@@ -3,17 +3,18 @@
 {% block content %}
 {% csrf_token %}
 <div class="admin_ingridient_container">
-    <form method = 'POST' enctype="multipart/form-data">
+    <form method='POST' enctype="multipart/form-data">
         {% csrf_token %}
-            {% for set in add_set %}
-            <ul>
-                {{ set.label }} : {{ set }}
-            </ul>
-            {% endfor %}
-            <p style="font-size: 12px;">* Format daty to: dzień.miesiąc.rok</p>
-        <br/>
+        {% for set in add_set %}
+        <ul>
+            {{ set.label }} : {{ set }}
+        </ul>
+        {% endfor %}
+        <p style="font-size: 12px;">* Format daty to: dzień.miesiąc.rok</p>
+        <br />
         <div style="border-top: 1px solid; height: 20px;"></div>
-        <button class="set_btn" type="submit">Zapisz</button>  
+        <button class="set_btn" type="submit">Zapisz</button>
+        <a href="/catering_przedszkole/adminpage/admin_zestawy" class="set_btn_back">Anuluj</a>
     </form>
 </div>
 {% endblock %}
