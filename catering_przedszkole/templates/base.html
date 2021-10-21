@@ -33,9 +33,11 @@
     {% if request.user.is_authenticated %}
     {% endif %}
     {% block content %}{% endblock %}
+    {% if request.path != '/catering_przedszkole/mainpage/' %}
     <a class="static_back_button" onclick="history.back()">
         Wstecz
     </a>
+    {% endif %}
     </div>
     <div class="footer">
         <div class="footer_content">
