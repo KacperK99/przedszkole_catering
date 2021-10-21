@@ -24,17 +24,18 @@
             <a href="{% url 'adminpage' %}">Panel Administracyjny</a>
             {% endif %}
             <a href="{% url 'zamowienia' %}">Moje zamówienia</a>
-            <a class="a_back" onclick="history.back()">Wstecz</a>
         </div>
         {% else %}
         <a href="{% url 'login' %}">Zaloguj się</a>
         <a href="{% url 'signup' %}">Zarejestruj się</a>
-        <a onclick="history.back()">Wstecz</a>
     </div>
     {% endif %}
     {% if request.user.is_authenticated %}
     {% endif %}
     {% block content %}{% endblock %}
+    <a class="static_back_button" onclick="history.back()">
+        Wstecz
+    </a>
     </div>
     <div class="footer">
         <div class="footer_content">
