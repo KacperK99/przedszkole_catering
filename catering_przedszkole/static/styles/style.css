@@ -676,10 +676,15 @@ th {
   cursor: pointer;
 }
 
-.select-box{
+.select-box,
+.select-box-type{
   margin-right: 25px;
   font-size: 15px;
   margin-left: 10px;
+}
+.select-box-type{
+  padding-top: 8px !important;
+  padding-bottom: 6px !important;
 }
 
 .searching_header{
@@ -933,4 +938,10 @@ th {
 .footer_content p{
   margin: 9px;
   padding-left: 5%;
+}
+
+.filter_type_title{
+  color: white;
+  font-size: 21px;
+  display:inline-block
 }

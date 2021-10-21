@@ -293,18 +293,17 @@ def admin_dania_view(request):
     elif request.user.is_admin == False:
         return redirect("mainpage")
     dishes = get_all_dishes(request)
+    types = get_all_types(request)
 
-    type_query = request.GET.get("typ")
+    type_query = request.GET.get("type")
     name_query = request.GET.get("nazwa")
 
-    if type_query != "" and type_query is not None:
-        dishes = dishes.filter(
-            typ_dania__nazwa_typu_dania__icontains=type_query.strip()
-        )
+    if type_query != "" and type_query != "---" and type_query is not None:
+        dishes = dishes.filter(typ_dania__ID__icontains=type_query.strip())
     if name_query != "" and name_query is not None:
         dishes = dishes.filter(nazwa_dania__icontains=name_query.strip())
 
-    return render(request, "admin_dania.html", {"dishes": dishes})
+    return render(request, "admin_dania.html", {"dishes": dishes, "types": types})
 
 
 def admin_danie_create(request):
