@@ -73,6 +73,7 @@ def registration_view(request, *args, **kwargs):
             raw_password = form.cleaned_data.get("password1")
             username = form.cleaned_data.get("username")
             phone_number = form.cleaned_data.get("phone_number")
+            address = form.cleaned_data.get("address")
             user = authenticate(email=email, password=raw_password)
             login(request, user)
             destination = kwargs.get("next")

@@ -42,6 +42,7 @@ class Uzytkownik(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=30)
+    address = models.CharField(max_length=80, default=" ")
     username = models.CharField(max_length=50, unique=True)
     balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     waiting_balance = models.DecimalField(max_digits=7, decimal_places=2, default=0)

@@ -18,6 +18,7 @@ class RegisterForm(UserCreationForm):
     username = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=60, help_text="Adres e-mail wymagany")
     phone_number = forms.CharField(max_length=30)
+    address = forms.CharField(max_length=80)
 
     class Meta:
         model = Uzytkownik
@@ -25,6 +26,7 @@ class RegisterForm(UserCreationForm):
             "email",
             "username",
             "phone_number",
+            "address",
             "password1",
             "password2",
         ]
@@ -112,11 +114,12 @@ class ZestawDanCreate(forms.ModelForm):
 class UzytkownikEdit(forms.ModelForm):
     class Meta:
         model = Uzytkownik
-        fields = ("username", "email", "phone_number")
+        fields = ("username", "email", "phone_number", "address")
         labels = {
             "username": "Nazwa użytkownika",
             "email": "Adres e-mail",
             "phone_number": "Numer telefonu",
+            "address": "Pełny adres",
         }
 
 
