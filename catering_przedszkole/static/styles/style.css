@@ -968,6 +968,7 @@ th {
 }
 
 .static_back_button:hover{
+  
     background-color: rgb(65, 65, 65);
     transition: 0.3s;
 }
