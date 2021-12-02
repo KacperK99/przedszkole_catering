@@ -28,7 +28,7 @@ from catering_przedszkole.models import (
     Zestaw_dan,
     Skladnik_dania,
 )
-from catering_przedszkole.controller.controller import (
+from catering_przedszkole.getters.getters import (
     get_all_visable_sets,
     get_data_of_sets,
     get_set_by_id,
@@ -911,7 +911,7 @@ def zamowienie_update(request, id_zamowienia):
     try:
         order = get_order_by_id(request, id_zamowienia)
         amount_before_update = order.ilosc_zestawow
-    except order.DoesNotExist:
+    except Zamowienie.DoesNotExist:
         return redirect("mainpage")
     if request.user.ID != order.zamawiajacy.ID:
         return redirect("mainpage")

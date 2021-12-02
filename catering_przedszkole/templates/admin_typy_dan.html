@@ -10,13 +10,15 @@
             <th>Usuń typ dania</th>
             <th>Edytuj typ dania</th>
         </tr>
-    {% for type in types %}
+        {% for type in types %}
         <tr>
             <td>{{ type.nazwa_typu_dania }}</td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(204, 57, 57);" href="admin_typy_dan/admin_typ_dania_delete/{{type.ID}}">Usuń</a></td>
-            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(49, 84, 197);" href="admin_typy_dan/admin_typ_dania_update/{{type.ID}}">Edytuj</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(207, 39, 39);"
+                    href="admin_typy_dan/admin_typ_dania_delete/{{type.ID}}">Usuń</a></td>
+            <td style="text-align: center;"><a class="set_btn" style="background-color: rgb(33, 72, 199);"
+                    href="admin_typy_dan/admin_typ_dania_update/{{type.ID}}">Edytuj</a></td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

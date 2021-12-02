@@ -23,7 +23,7 @@
         <h2>Zestaw składa się z dań: </h2>
         {% for data in data_set %}
         {% if data.zestaw.ID == set.ID %}
-        <h1 class="dish_in_set"> {{data.danie.typ_dania.nazwa_typu_dania}} - {{data.danie.nazwa_dania}} </h1>
+        <h1 class="dish_in_set">{{data.danie.nazwa_dania}} </h1>
         {% endif %}
         {% empty %}
         <p>Brak dań</p>

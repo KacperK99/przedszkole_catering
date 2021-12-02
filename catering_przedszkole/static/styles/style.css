@@ -352,6 +352,8 @@ body, html{
   padding-right: 20px;
   margin-bottom: 25px;
   margin-top: 40px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .set_order input {
@@ -436,6 +438,8 @@ body, html{
   padding-right: 20px;
   margin-bottom: 25px;
   margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .container h1 {
@@ -461,6 +465,8 @@ body, html{
   padding: 20px;
   margin-bottom: 25px;
   margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .admin_ingridient_table {
@@ -533,6 +539,8 @@ th {
   padding-right: 20px;
   margin-bottom: 25px;
   margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
 }
 
 .account_user h1 {
