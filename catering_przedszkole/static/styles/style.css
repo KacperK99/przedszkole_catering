@@ -255,8 +255,31 @@ body, html{
     padding-bottom: 40px !important;
   }
   .container {
-    width: 80% !important;
+    width: 90% !important;
     padding-bottom: 20px !important;
+  }
+  .set_container{
+    width: 90% !important;
+    padding-bottom: 20px !important; 
+  }
+  .set_container h1 {
+    font-size: 17px !important;
+  }
+  .set_container h2 {
+    font-size: 14px !important;
+  }
+  .set_container p {
+    font-size: 13px !important;
+    font-weight:600 !important;
+  }
+  .slide_label{
+    font-size: 26px !important;
+  }
+  .set_btn{
+    font-size: 24px !important;
+  }
+  .set_mainpage h2{
+    font-size: 24px !important;
   }
   .my_orders {
     font-size: 19px !important;
@@ -452,6 +475,35 @@ body, html{
 }
 
 .container p {
+  color: #f2f2f2;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.set_container{
+  margin: auto;
+  width: 70%;
+  background-color: rgb(72, 204, 90);
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  border-radius: 5px;
+  box-shadow: 0 3px 7px rgb(0 0 0 / 0.3);
+}
+
+.set_container h1 {
+  color: #f2f2f2;
+}
+
+.set_container h2 {
+  color: #f2f2f2;
+  font-size: 20px;
+}
+
+.set_container p {
   color: #f2f2f2;
   font-size: 18px;
   font-weight: bold;

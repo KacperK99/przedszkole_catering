@@ -84,19 +84,25 @@
         $("#send").click(function () {
             const commentInput = document.getElementById("inputComment").value
             const numberInput = document.getElementById("inputNumber").value
-            console.log(commentInput, numberInput);
-            $.ajax({
-                url: '/catering_przedszkole/mainpage/zestaw/zamow/{{zestaw_id}}',
-                type: "GET",
-                data: {
-                    commentInput: commentInput,
-                    numberInput: numberInput,
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                error: function (xhr, errmsg, err) {
-                    alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
-                }
-            });
+            const deliverytimeInput = document.getElementById("inputDeliveryTime").value
+            console.log(commentInput, numberInput, deliverytimeInput);
+            console.log(deliverytimeInput[1])
+            if ((deliverytimeInput[0] == 1 && deliverytimeInput[1] == 8) && (deliverytimeInput[3] > 0 && deliverytimeInput[4] > 0)) { }
+            else if ((deliverytimeInput[0] == 0 && deliverytimeInput[1] > 5) || (deliverytimeInput[0] == 1 && deliverytimeInput[1] < 9)) {
+                $.ajax({
+                    url: '/catering_przedszkole/mainpage/zestaw/zamow/{{zestaw_id}}',
+                    type: "GET",
+                    data: {
+                        commentInput: commentInput,
+                        numberInput: numberInput,
+                        deliverytimeInput: deliverytimeInput,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alert("Could not send URL to Django. Error: " + xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            }
         });
     });
 

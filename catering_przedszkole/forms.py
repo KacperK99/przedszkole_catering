@@ -144,8 +144,9 @@ class AdminDodajZmienKomentarzAnulowania(forms.ModelForm):
 class ZamowienieEdit(forms.ModelForm):
     class Meta:
         model = Zamowienie
-        fields = ("ilosc_zestawow", "komentarz_zamowienia")
+        fields = ("ilosc_zestawow", "komentarz_zamowienia", "czas_dostawy")
         labels = {
             "ilosc_zestawow": "Ilość zamówionych zestawów",
             "komentarz_zamowienia": "Komentarz do zamówienia",
+            "czas_dostawy": "Czas dostawy"
         }

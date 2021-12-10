@@ -4,7 +4,7 @@
 {% csrf_token %}
 
 
-<div class="container" style="width: 70%;">
+<div class="set_container" style="width: 70%;">
     <h1>{{singleset.nazwa_zestawu}}</h1>
     <div id="slideshow">
         {% for d in data %}
@@ -20,7 +20,7 @@
         {% endfor %}
     </div>
     {% for d in data %}
-    <h1 class="single_dish">{{d.danie.typ_dania.nazwa_typu_dania}} - {{d.danie.nazwa_dania}}</h1>
+    <h1>{{d.danie.typ_dania.nazwa_typu_dania}} - {{d.danie.nazwa_dania}}</h1>
     <p>Posiłek składa się z:</p>
     {% for i in ing %}
     {% if d.danie.ID == i.danie.ID %}

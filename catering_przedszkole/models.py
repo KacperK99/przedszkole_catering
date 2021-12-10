@@ -142,6 +142,7 @@ class Zamowienie(models.Model):
     powod_anulowania = models.TextField(blank=True, null=True)
     czy_oplacone = models.BooleanField(default=False)
     do_zaplaty = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    czas_dostawy = models.TimeField(default="08:00")
 
     def status(self):
         if self.czy_potwierdzone == False:

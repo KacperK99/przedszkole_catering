@@ -175,9 +175,10 @@ def zamow_view(request, id_zestaw, *args, **kwargs):
         zestaw_instance = get_set_by_id(request, id_zestaw)
     except Zestaw.DoesNotExist:
         return redirect("mainpage")
-    if (request.method == "GET") and request.GET.get("numberInput"):
+    if (request.method == "GET") and request.GET.get("numberInput") and (request.GET.get("deliverytimeInput")<="18:00" or request.GET.get("deliverytimeInput")>="06:00"):
         com = request.GET.get("commentInput")
         num = request.GET.get("numberInput")
+        tim = request.GET.get("deliverytimeInput")
         pay = float(zestaw_instance.cena_zestawu) * float(num)
         zam = Zamowienie.objects.create(
             komentarz_zamowienia=com,
@@ -185,6 +186,7 @@ def zamow_view(request, id_zestaw, *args, **kwargs):
             ilosc_zestawow=num,
             zestaw=zestaw_instance,
             do_zaplaty=pay,
+            czas_dostawy=tim,
         )
         actual_waiting_balance = float(zam.zamawiajacy.waiting_balance)
         new_waiting_balance = float(actual_waiting_balance) + float(pay)
@@ -222,15 +224,19 @@ def zamowienie_anuluj(request, id_zam):
         order = get_order_by_id(request, id_zam)
     except Zamowienie.DoesNotExist:
         return redirect("zamowienia")
-    order.czy_anulowano = True
-    order.powod_anulowania = "Anulowano przez użytkownika"
-    order.save()
-    actual_waiting_balance = float(order.zamawiajacy.waiting_balance)
-    new_waiting_balance = float(actual_waiting_balance) - float(order.do_zaplaty)
-    user_email = request.user.email
-    user_to_update = Uzytkownik.objects.filter(email=user_email).update(
-        waiting_balance=new_waiting_balance
-    )
+    if(order.czy_anulowano == False):
+        order.czy_anulowano = True
+        order.powod_anulowania = "Anulowano przez użytkownika"
+        order.save()
+        all_orders = get_all_orders(request)
+        new_waiting_balance = 0
+        for order in all_orders:
+            if(not order.czy_anulowano and not order.czy_oplacone):
+                new_waiting_balance+=order.do_zaplaty
+        user_email = request.user.email
+        user_to_update = Uzytkownik.objects.filter(email=user_email).update(
+            waiting_balance=new_waiting_balance
+        )
     return redirect("zamowienia")
 
 
